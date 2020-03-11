@@ -11,7 +11,6 @@ std::string board::status() {
   return result;
 }
 
-
 void board::mark(marker m, int coord) {
   if (coord < 0 || coord > 8)
     throw std::out_of_range("out of range marking");
@@ -41,20 +40,19 @@ std::vector<int> board::get_available_slots() {
   return result;
 }
 
-bool board::game_finished() {
+game_result board::result() {
   // min 5 markers should be on the board
-  if (marker_count < 5)
-    return false;
+  if (marker_count < 5) {
+    return game_result{false, marker::x};
+  }
 
   for (int j = 0; j < 8; j++) {
     if (space[lanes[j][0]] == '-')
       continue;
-
     if (space[lanes[j][0]] != space[lanes[j][1]])
       continue;
     else if (space[lanes[j][1]] == space[lanes[j][2]])
-      return true;
+      return game_result{true, space[lanes[j][0]]};
   }
-
-  return false;
+  return game_result{false, marker::x};
 }

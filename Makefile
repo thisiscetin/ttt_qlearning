@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.16.5/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/mcetin/_Dev/qlearning
+CMAKE_SOURCE_DIR = /Users/mcetin/_Dev/xox_qlearn
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/mcetin/_Dev/qlearning
+CMAKE_BINARY_DIR = /Users/mcetin/_Dev/xox_qlearn
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mcetin/_Dev/qlearning/CMakeFiles /Users/mcetin/_Dev/qlearning/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mcetin/_Dev/xox_qlearn/CMakeFiles /Users/mcetin/_Dev/xox_qlearn/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mcetin/_Dev/qlearning/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/mcetin/_Dev/xox_qlearn/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -65,24 +65,42 @@ TEST_CASE("returns available slots as expected", "[board]") {
 
 TEST_CASE("returns false if game can't be finished", "[board/gameend]") {
   board b = board();
-  REQUIRE(b.game_finished() == false);
+  REQUIRE(b.result().finished == false);
 
   b.mark(marker::x, 1);
   b.mark(marker::o, 2);
   b.mark(marker::x, 0);
   b.mark(marker::o, 8);
-  REQUIRE(b.game_finished() == false);
+  REQUIRE(b.result().finished == false);
 }
 
-TEST_CASE("returns true if game is finished 0", "[board/gameend]") {
+TEST_CASE("returns true and marker if game is finished 0", "[board/gameend]") {
   board b = board();
 
   b.mark(marker::x, 0);
   b.mark(marker::o, 3);
   b.mark(marker::x, 1);
   b.mark(marker::o, 4);
-  REQUIRE(b.game_finished() == false);
+  REQUIRE(b.result().finished == false);
 
   b.mark(marker::x, 2);
-  REQUIRE(b.game_finished() == true);
+  REQUIRE(b.result().finished == true);
+  REQUIRE(b.result().mark == 'x');
+}
+
+TEST_CASE("returns true and marker if game is finished 1", "[board/gameend]") {
+  board b = board();
+
+  b.mark(marker::x, 0);
+  b.mark(marker::o, 2);
+  b.mark(marker::x, 1);
+  b.mark(marker::o, 4);
+  REQUIRE(b.result().finished == false);
+
+  b.mark(marker::x, 5);
+  REQUIRE(b.result().finished == false);
+
+  b.mark(marker::o, 6);
+  REQUIRE(b.result().finished == true);
+  REQUIRE(b.result().mark == 'o');
 }

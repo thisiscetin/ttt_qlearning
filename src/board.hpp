@@ -17,6 +17,11 @@ static std::vector<int> lanes[8] {
 
 enum marker { x = 'x', o = 'o' };
 
+struct game_result {
+  bool finished;
+  char mark;
+};
+
 class board {
  public:
   board() {
@@ -32,7 +37,7 @@ class board {
   void mark(marker m, int coord);
   std::vector<int> get_available_slots();
   std::string status();
-  bool game_finished();
+  game_result result();
   int get_marker_count();
 
  private:
