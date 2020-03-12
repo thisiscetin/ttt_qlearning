@@ -24,26 +24,24 @@ struct game_result {
 
 class board {
  public:
-  board() {
+  board() : marker_count(0), turn(marker::x) {
     space = new char[9]{};
     std::fill_n(space, 9, '-');
-    marker_count = 0;
-    turn = marker::x;
   }
   ~board() {
     delete space;
   }
 
-  void mark(marker m, int coord);
+  void mark(marker m, int pos);
   std::vector<int> get_available_slots();
+  int get_marker_count();
+  marker get_turn();
   std::string status();
   game_result result();
-  int get_marker_count();
 
  private:
-    char* space;
-    int marker_count;
-    marker turn;
+  char* space;
+  int marker_count;
+  marker turn;
 };
-
 #endif // SRC_BOARD_HPP_

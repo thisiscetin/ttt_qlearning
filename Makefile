@@ -161,6 +161,33 @@ src/board.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/board.cpp.s
 .PHONY : src/board.cpp.s
 
+src/game.o: src/game.cpp.o
+
+.PHONY : src/game.o
+
+# target to build an object file
+src/game.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.o
+.PHONY : src/game.cpp.o
+
+src/game.i: src/game.cpp.i
+
+.PHONY : src/game.i
+
+# target to preprocess a source file
+src/game.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.i
+.PHONY : src/game.cpp.i
+
+src/game.s: src/game.cpp.s
+
+.PHONY : src/game.s
+
+# target to generate assembly for a file
+src/game.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.s
+.PHONY : src/game.cpp.s
+
 test/test_board.o: test/test_board.cpp.o
 
 .PHONY : test/test_board.o
@@ -188,6 +215,33 @@ test/test_board.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_board.cpp.s
 .PHONY : test/test_board.cpp.s
 
+test/test_game.o: test/test_game.cpp.o
+
+.PHONY : test/test_game.o
+
+# target to build an object file
+test/test_game.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.o
+.PHONY : test/test_game.cpp.o
+
+test/test_game.i: test/test_game.cpp.i
+
+.PHONY : test/test_game.i
+
+# target to preprocess a source file
+test/test_game.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.i
+.PHONY : test/test_game.cpp.i
+
+test/test_game.s: test/test_game.cpp.s
+
+.PHONY : test/test_game.s
+
+# target to generate assembly for a file
+test/test_game.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.s
+.PHONY : test/test_game.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -201,9 +255,15 @@ help:
 	@echo "... src/board.o"
 	@echo "... src/board.i"
 	@echo "... src/board.s"
+	@echo "... src/game.o"
+	@echo "... src/game.i"
+	@echo "... src/game.s"
 	@echo "... test/test_board.o"
 	@echo "... test/test_board.i"
 	@echo "... test/test_board.s"
+	@echo "... test/test_game.o"
+	@echo "... test/test_game.i"
+	@echo "... test/test_game.s"
 .PHONY : help
 
 

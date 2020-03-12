@@ -104,3 +104,20 @@ TEST_CASE("returns true and marker if game is finished 1", "[board/gameend]") {
   REQUIRE(b.result().finished == true);
   REQUIRE(b.result().mark == 'o');
 }
+
+TEST_CASE("returns true and marker if game is finished 2", "[board/gameend]") {
+  board b = board();
+
+  b.mark(marker::x, 0);
+  b.mark(marker::o, 2);
+  b.mark(marker::x, 3);
+  b.mark(marker::o, 4);
+  REQUIRE(b.result().finished == false);
+
+  b.mark(marker::x, 5);
+  REQUIRE(b.result().finished == false);
+
+  b.mark(marker::o, 6);
+  REQUIRE(b.result().finished == true);
+  REQUIRE(b.result().mark == 'o');
+}

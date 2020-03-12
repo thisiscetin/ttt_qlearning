@@ -9,7 +9,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 ADD_EXECUTABLE(tests
   ${CMAKE_CURRENT_SOURCE_DIR}/test/test_board.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/test/test_game.cpp
+
   ${CMAKE_CURRENT_SOURCE_DIR}/src/board.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/game.cpp
 )
 
 set_target_properties(tests
