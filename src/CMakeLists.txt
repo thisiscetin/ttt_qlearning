@@ -5,6 +5,7 @@ ADD_EXECUTABLE(game
 
   ${PROJECT_SOURCE_DIR}/src/board.cpp
   ${PROJECT_SOURCE_DIR}/src/game.cpp
+  ${PROJECT_SOURCE_DIR}/src/table.cpp
 )
 
 set_target_properties(game
