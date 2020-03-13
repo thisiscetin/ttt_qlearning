@@ -1,12 +1,14 @@
 #include "game.hpp"
 
-game_result game::play(marker m, int pos) {
+const result game::play(marker m, int pos) {
+  if (m == last_played)
+    throw std::invalid_argument("its not your turn");
+
   brd->mark(m, pos);
-  return brd->result();
+  last_played = m;
+  return brd->get_result();
 }
 
-std::string game::status() {
-  std::string result = brd->status() + "turn:";
-  result += brd->get_turn() == marker::x ? "x\n" : "y\n";
-  return result;
+const marker game::get_last_played() {
+  return last_played;
 }

@@ -122,6 +122,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named game
+
+# Build rule for target.
+game: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 game
+.PHONY : game
+
+# fast build rule for target.
+game/fast:
+	$(MAKE) -f src/CMakeFiles/game.dir/build.make src/CMakeFiles/game.dir/build
+.PHONY : game/fast
+
+#=============================================================================
 # Target rules for targets named tests
 
 # Build rule for target.
@@ -131,116 +144,8 @@ tests: cmake_check_build_system
 
 # fast build rule for target.
 tests/fast:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
+	$(MAKE) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/build
 .PHONY : tests/fast
-
-src/board.o: src/board.cpp.o
-
-.PHONY : src/board.o
-
-# target to build an object file
-src/board.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/board.cpp.o
-.PHONY : src/board.cpp.o
-
-src/board.i: src/board.cpp.i
-
-.PHONY : src/board.i
-
-# target to preprocess a source file
-src/board.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/board.cpp.i
-.PHONY : src/board.cpp.i
-
-src/board.s: src/board.cpp.s
-
-.PHONY : src/board.s
-
-# target to generate assembly for a file
-src/board.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/board.cpp.s
-.PHONY : src/board.cpp.s
-
-src/game.o: src/game.cpp.o
-
-.PHONY : src/game.o
-
-# target to build an object file
-src/game.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.o
-.PHONY : src/game.cpp.o
-
-src/game.i: src/game.cpp.i
-
-.PHONY : src/game.i
-
-# target to preprocess a source file
-src/game.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.i
-.PHONY : src/game.cpp.i
-
-src/game.s: src/game.cpp.s
-
-.PHONY : src/game.s
-
-# target to generate assembly for a file
-src/game.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/src/game.cpp.s
-.PHONY : src/game.cpp.s
-
-test/test_board.o: test/test_board.cpp.o
-
-.PHONY : test/test_board.o
-
-# target to build an object file
-test/test_board.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_board.cpp.o
-.PHONY : test/test_board.cpp.o
-
-test/test_board.i: test/test_board.cpp.i
-
-.PHONY : test/test_board.i
-
-# target to preprocess a source file
-test/test_board.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_board.cpp.i
-.PHONY : test/test_board.cpp.i
-
-test/test_board.s: test/test_board.cpp.s
-
-.PHONY : test/test_board.s
-
-# target to generate assembly for a file
-test/test_board.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_board.cpp.s
-.PHONY : test/test_board.cpp.s
-
-test/test_game.o: test/test_game.cpp.o
-
-.PHONY : test/test_game.o
-
-# target to build an object file
-test/test_game.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.o
-.PHONY : test/test_game.cpp.o
-
-test/test_game.i: test/test_game.cpp.i
-
-.PHONY : test/test_game.i
-
-# target to preprocess a source file
-test/test_game.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.i
-.PHONY : test/test_game.cpp.i
-
-test/test_game.s: test/test_game.cpp.s
-
-.PHONY : test/test_game.s
-
-# target to generate assembly for a file
-test/test_game.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/test/test_game.cpp.s
-.PHONY : test/test_game.cpp.s
 
 # Help Target
 help:
@@ -251,19 +156,8 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... game"
 	@echo "... tests"
-	@echo "... src/board.o"
-	@echo "... src/board.i"
-	@echo "... src/board.s"
-	@echo "... src/game.o"
-	@echo "... src/game.i"
-	@echo "... src/game.s"
-	@echo "... test/test_board.o"
-	@echo "... test/test_board.i"
-	@echo "... test/test_board.s"
-	@echo "... test/test_game.o"
-	@echo "... test/test_game.i"
-	@echo "... test/test_game.s"
 .PHONY : help
 
 

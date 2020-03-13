@@ -8,15 +8,17 @@ class game {
  public:
   game() {
     brd = new board();
+    last_played = marker::n;
   }
   ~game() {
     delete brd;
   }
 
-  game_result play(marker mrk, int pos);
-  std::string status();
+  const result play(marker mrk, int pos);
+  const marker get_last_played();
  private:
   board* brd;
+  marker last_played;
 };
 
 #endif // SRC_GAME_HPP_
