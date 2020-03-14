@@ -16,6 +16,7 @@ class game {
 
   const result play(marker mrk, int pos);
   const marker get_last_played();
+  std::string render_board();
  private:
   board* brd;
   marker last_played;

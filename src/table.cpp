@@ -29,3 +29,7 @@ int table::predict(const std::string state, const std::vector<int> empty_slots) 
 
   return store[state]->get_maxQ_action();
 }
+
+int table::get_table_size() {
+  return store.size();
+}

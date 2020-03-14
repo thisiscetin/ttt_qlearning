@@ -12,3 +12,16 @@ const result game::play(marker m, int pos) {
 const marker game::get_last_played() {
   return last_played;
 }
+
+std::string game::render_board() {
+  char* space = brd->get_space();
+
+  std::string res = "";
+  for (int i = 0; i < 9; i++) {
+
+    if (i % 3 == 0 && i > 0)
+      res += "\n";
+    res += space[i];
+  }
+  return res + "\n";
+}

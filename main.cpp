@@ -19,6 +19,8 @@ int main() {
 
     res = g.play(marker(m), pos);
     finished = res.finished;
+
+    std::cout << g.render_board();
   }
 
   std::cout << (res.winner == marker::x ? "X" : "O");
