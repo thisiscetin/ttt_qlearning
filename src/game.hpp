@@ -2,6 +2,7 @@
 #define SRC_GAME_HPP_
 
 #include <string>
+#include <vector>
 #include "board.hpp"
 
 class game {
@@ -16,6 +17,7 @@ class game {
 
   const result play(marker mrk, int pos);
   const marker get_last_played();
+  const std::vector<int> get_available_slots();
   std::string render_board();
  private:
   board* brd;

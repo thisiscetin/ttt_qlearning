@@ -1,7 +1,4 @@
 #include "board.hpp"
-
-#include <iostream>
-
 void board::mark(marker m, int pos) {
   if (pos < 0 || pos > 8)
     throw std::out_of_range("out of range marking");

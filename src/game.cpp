@@ -25,3 +25,7 @@ std::string game::render_board() {
   }
   return res + "\n";
 }
+
+const std::vector<int> game::get_available_slots() {
+  return brd->get_available_slots();
+}

@@ -4,6 +4,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 ADD_EXECUTABLE(tests
   ${PROJECT_SOURCE_DIR}/test/test_board.cpp
   ${PROJECT_SOURCE_DIR}/test/test_game.cpp
+  ${PROJECT_SOURCE_DIR}/test/test_table.cpp
 
   ${PROJECT_SOURCE_DIR}/src/board.cpp
   ${PROJECT_SOURCE_DIR}/src/game.cpp
