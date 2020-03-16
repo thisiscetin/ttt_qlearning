@@ -1,6 +1,8 @@
 
 bin/
 .DS_Store
+.idea/
+.vscode/
 Makefile
 CMakeFiles/
 CMakeCache.txt

@@ -8,8 +8,7 @@
 
 class snapshot {
  public:
-  explicit snapshot(const std::vector<int> empty_slots) : maxQ(0),
-    maxQ_action(empty_slots[0]) {
+  explicit snapshot(const std::vector<int> empty_slots) {
     for (auto const& slot : empty_slots)
       possible_actions[slot] = 0;
   }
@@ -21,8 +20,6 @@ class snapshot {
  private:
   std::unordered_map<int, float> possible_actions;
   std::mutex store_mutex;
-  float maxQ;
-  int maxQ_action;
 };
 
 class table {

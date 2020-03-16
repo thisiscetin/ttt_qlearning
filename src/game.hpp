@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <mutex> // NOLINT
 #include "board.hpp"
 
 class game {
@@ -22,6 +23,7 @@ class game {
  private:
   board* brd;
   marker last_played;
+  std::mutex game_mutex;
 };
 
 #endif // SRC_GAME_HPP_

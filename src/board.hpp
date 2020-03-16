@@ -30,19 +30,17 @@ static cross* lanes[8] {
 class board {
  public:
   board() {
-    space = new char[9];
-    std::fill_n(space, 9, marker::n);
+    space = std::vector<char> {
+      '-', '-', '-', '-', '-', '-', '-', '-', '-'};
   }
-  ~board() {
-    delete space;
-  }
+
   void mark(marker m, int pos);
-  char* get_space();
+  const std::vector<char> get_space();
   const std::vector<int> get_available_slots();
   const result get_result();
 
  private:
-  char* space;
+  std::vector<char> space;
 };
 
 #endif // SRC_BOARD_HPP_

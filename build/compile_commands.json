@@ -1,0 +1,67 @@
+[
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/src",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/game.dir/__/main.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/main.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/main.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/src",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/game.dir/board.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/board.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/board.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/src",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/game.dir/game.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/game.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/game.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/src",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/game.dir/table.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/table.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/table.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/src",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/game.dir/trainer.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/trainer.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/trainer.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/test_board.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/test/test_board.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/test/test_board.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/test_game.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/test/test_game.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/test/test_game.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/test_table.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/test/test_table.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/test/test_table.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/test_trainer.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/test/test_trainer.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/test/test_trainer.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/__/src/board.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/board.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/board.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/__/src/game.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/game.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/game.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/__/src/table.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/table.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/table.cpp"
+},
+{
+  "directory": "/Users/mcetin/_Dev/xox_qlearn/build/test",
+  "command": "/usr/bin/clang++   -I/Users/mcetin/_Dev/xox_qlearn/ext -I/Users/mcetin/_Dev/xox_qlearn/src   -std=c++17 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -o CMakeFiles/tests.dir/__/src/trainer.cpp.o -c /Users/mcetin/_Dev/xox_qlearn/src/trainer.cpp",
+  "file": "/Users/mcetin/_Dev/xox_qlearn/src/trainer.cpp"
+}
+]

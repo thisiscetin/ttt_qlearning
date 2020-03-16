@@ -1,4 +1,6 @@
 #include "board.hpp"
+#include <iostream>
+
 void board::mark(marker m, int pos) {
   if (pos < 0 || pos > 8)
     throw std::out_of_range("out of range marking");
@@ -8,13 +10,14 @@ void board::mark(marker m, int pos) {
   space[pos] = m;
 }
 
-char* board::get_space() {
+const std::vector<char> board::get_space() {
   return space;
 }
 
 const std::vector<int> board::get_available_slots() {
-  std::vector<int> result;
-  for (int i = 0; i < 9; i++) {
+  std::vector<int> result = std::vector<int>{};
+
+  for (int i = 0; i < space.size(); i++) {
     if (space[i] == marker::n)
       result.push_back(i);
   }
