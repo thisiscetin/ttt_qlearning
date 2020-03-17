@@ -1,19 +1,29 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include <iostream>
-#include <string>
-
-#include "trainer.hpp"
+#include "trainer.h"
 
 int main() {
-  strategy* s = new strategy {0.5, 0.2, 1};
-  agent* a = new agent(marker::x, s);
-  dummy_agent* d = new dummy_agent();
+    strategy* s = new strategy {0.5, 0.2, 4};
+    agent* a = new agent(marker::x, s);
+    dummy_agent* d = new dummy_agent();
 
-  trainer* t = new trainer(a, d);
-  t->play();
+    trainer* t = new trainer(a, d);
 
-  return 0;
+    int counter = 0;
+    int lastWon = 0;
+    int lastCheckPoint = 0;
+    while (true) {
+        counter++;
+        t->play();
+
+        if (counter % 100000 == 0) {
+            const trainer_stats &s = t->get_stats();
+            std::cout << "agent won %: " << float(s.agent_won - lastWon) * 100 / float(counter - lastCheckPoint);
+            std::cout << " table (action) size: " << t->get_table_size() << std::endl;
+
+            lastWon = s.agent_won;
+            lastCheckPoint = counter;
+        }
+    }
+    return 0;
 }
 

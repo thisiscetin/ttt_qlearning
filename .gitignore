@@ -3,6 +3,7 @@ bin/
 .DS_Store
 .idea/
 .vscode/
+xox_qlearning.cbp
 Makefile
 CMakeFiles/
 CMakeCache.txt

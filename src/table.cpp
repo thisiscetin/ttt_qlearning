@@ -1,73 +1,82 @@
+//
+// Created by M. Cetin on 3/17/20.
+//
+
 #include <limits>
+#include "table.h"
 
-#include "table.hpp"
+void snapshot::update(int action_pos, float new_value) {
+    std::lock_guard<std::mutex> guard(store_mutex);
 
-void snapshot::update(int action, float new_value) {
-  std::lock_guard<std::mutex> guard(store_mutex);
-  if (possible_actions.find(action) == possible_actions.end())
-    throw std::logic_error("possible action is not found in snapshot");
-  possible_actions[action] = new_value;
+    for (auto const &action : possible_actions) {
+        if (action->pos == action_pos) {
+            action->val = new_value;
+            return;
+        }
+    }
+    possible_actions.push_back(new action{action_pos, new_value});
 }
 
-float snapshot::get_Q(int action) {
-  return possible_actions[action];
+float snapshot::get_Q(int action_pos) {
+    for (auto const &action : possible_actions)
+        if (action->pos == action_pos)
+            return action->val;
+    return 0;
 }
 
 float snapshot::get_maxQ() {
-  if (possible_actions.size() == 0)
-    throw std::logic_error("possible actions size is zero");
-
-  float maxQ = std::numeric_limits<float>::lowest();
-  for (auto const& i : possible_actions) {
-    if (i.second > maxQ) {
-      maxQ = i.second;
-    }
-  }
-  return maxQ;
+    float maxQ = std::numeric_limits<float>::lowest();
+    for (auto const &action : possible_actions)
+        if (action->val > maxQ)
+            maxQ = action->val;
+    return possible_actions.size() > 0 ? maxQ : 0;
 }
 
 int snapshot::get_maxQ_action() {
-  if (possible_actions.size() == 0)
-    throw std::logic_error("possible actions size is zero");
+    float maxQ = std::numeric_limits<float>::lowest();
+    float maxQ_action = -1;
+    for (auto const &action : possible_actions)
+        if (action->val > maxQ) {
+            maxQ = action->val;
+            maxQ_action = action->pos;
+        }
+    return maxQ_action;
+}
 
-  float maxQ = std::numeric_limits<float>::lowest();
-  float maxQ_action = -1;
-  for (auto const& i : possible_actions) {
-    if (i.second > maxQ) {
-      maxQ = i.second;
-      maxQ_action = i.first;
-    }
-  }
-  return maxQ_action;
+int snapshot::get_action_count() {
+    return possible_actions.size();
 }
 
 void table::update(const std::string state, int action, float new_value) {
-  // skip random movement updates for simplicity
-  if (store.find(state) == store.end())
-    throw std::logic_error("state not found");
-  store[state]->update(action, new_value);
+    if (store.find(state) == store.end())
+        store[state] = new snapshot(std::vector<int>{});
+    store[state]->update(action, new_value);
 }
 
 int table::predict(const std::string state, const std::vector<int> empty_slots) {
-  if (store.find(state) == store.end())
-    store[state] = new snapshot(empty_slots);
+    if (store.find(state) == store.end())
+        store[state] = new snapshot(empty_slots);
 
-  return store[state]->get_maxQ_action();
+    return store[state]->get_maxQ_action();
 }
 
 int table::get_table_size() {
-  return store.size();
+    int size = 0;
+    for (auto const i : store) {
+        size += i.second->get_action_count();
+    }
+    return size;
 }
 
 float table::get_maxQ_at_state(const std::string state) {
-  if (store.find(state) == store.end())
-    return 0;
+    if (store.find(state) == store.end())
+        return 0;
 
-  return store[state]->get_maxQ();
+    return store[state]->get_maxQ();
 }
 
 float table::get_Q_at_state_action(const std::string state, int action) {
     if (store.find(state) == store.end())
         return 0;
-  return store[state]->get_Q(action);
+    return store[state]->get_Q(action);
 }

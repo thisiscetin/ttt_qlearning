@@ -1,17 +1,12 @@
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
 
 ADD_EXECUTABLE(game
-  ${PROJECT_SOURCE_DIR}/main.cpp
-
-  ${PROJECT_SOURCE_DIR}/src/board.cpp
-  ${PROJECT_SOURCE_DIR}/src/game.cpp
-  ${PROJECT_SOURCE_DIR}/src/table.cpp
-  ${PROJECT_SOURCE_DIR}/src/trainer.cpp
-)
+        ../main.cpp
+        board.cpp board.h game.cpp game.h table.cpp table.h trainer.cpp trainer.h)
 
 set_target_properties(game
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
+        PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        )
 
-target_link_libraries (game)
+target_link_libraries(game)
