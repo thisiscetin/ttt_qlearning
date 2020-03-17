@@ -57,6 +57,8 @@ void trainer::play() {
 
             if (r.finished && r.winner == a_marker) {
                 a->learn(state, g.render_board(), action, 1.0);
+            } else if (r.finished && r.winner == d_marker) {
+                a->learn(state, g.render_board(), action, -1.0);
             }
         } else {
             r = g.play(d_marker, b->play(g.get_available_slots()));

@@ -2,7 +2,7 @@
 #include "trainer.h"
 
 int main() {
-    strategy* s = new strategy {0.4, 0.3, 20};
+    strategy* s = new strategy {0.5, 0.5, 20};
     agent* a = new agent(marker::x, s);
     dummy_agent* d = new dummy_agent();
 

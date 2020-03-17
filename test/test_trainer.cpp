@@ -12,7 +12,7 @@ TEST_CASE("returns marker as expected", "[trainer/agent]") {
 TEST_CASE("play returns first slot when epsilon is -1", "[trainer/agent]") {
     agent a = agent(marker::x, new strategy{0, 0, -1});
 
-    REQUIRE(a.play("ds", std::vector<int>{1, 2, 3}) == 3);
+    REQUIRE(a.play("ds", std::vector<int>{1, 2, 3}) == 1);
 }
 
 TEST_CASE("play returns random slot when epsilon is not -1", "[trainer/agent]") {
