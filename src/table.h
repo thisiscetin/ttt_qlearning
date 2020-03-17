@@ -45,6 +45,7 @@ public:
 
 private:
     std::unordered_map<std::string, snapshot*> store;
+    std::mutex store_mutex;
 };
 
 

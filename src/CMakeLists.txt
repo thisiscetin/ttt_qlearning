@@ -2,7 +2,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
 
 ADD_EXECUTABLE(game
         ../main.cpp
-        board.cpp board.h game.cpp game.h table.cpp table.h trainer.cpp trainer.h)
+        easy_game.cpp easy_game.h)
 
 set_target_properties(game
         PROPERTIES

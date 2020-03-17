@@ -39,6 +39,8 @@ public:
 
     int get_table_size();
 
+    float get_max_Q_at_state(const std::string state);
+
 private:
     table *t;
     strategy *s;

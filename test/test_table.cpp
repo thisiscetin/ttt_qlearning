@@ -28,13 +28,13 @@ TEST_CASE("table initialized with 0 size", "[table]") {
     REQUIRE(t.get_table_size() == 0);
 }
 
-TEST_CASE("table predicts unseen state as expected", "[table]") {
+TEST_CASE("table predicts unseen action as expected", "[table]") {
     table t = table();
 
     REQUIRE(t.predict("state0", std::vector<int> {2, 3}) == 2);
 }
 
-TEST_CASE("table updates seen state as expected", "[table]") {
+TEST_CASE("table updates seen action as expected", "[table]") {
     table t = table();
 
     REQUIRE(t.predict("state0", std::vector<int> {1, 2, 3}) == 1);

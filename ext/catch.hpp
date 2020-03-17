@@ -4120,7 +4120,7 @@ namespace Generators {
             // 2) We are reading our own cache
 
             // In the first case, we need to poke the underlying generator.
-            // If it happily moves, we are left in that state, otherwise it is time to start reading from our cache
+            // If it happily moves, we are left in that action, otherwise it is time to start reading from our cache
             if (m_current_repeat == 0) {
                 const auto success = m_generator.next();
                 if (!success) {
@@ -8925,7 +8925,7 @@ namespace detail {
         auto operator+( T const &other ) const -> Parser;
     };
 
-    // Common code and state for Args and Opts
+    // Common code and action for Args and Opts
     template<typename DerivedT>
     class ParserRefImpl : public ComposableParserImpl<DerivedT> {
     protected:
@@ -12189,7 +12189,7 @@ namespace Catch {
         if (result.getResultType() != ResultWas::Warning)
             m_messageScopes.clear();
 
-        // Reset working state
+        // Reset working action
         resetAssertionInfo();
         m_lastResult = result;
     }
@@ -13112,7 +13112,7 @@ namespace Catch {
     struct StringStreams {
         std::vector<std::unique_ptr<std::ostringstream>> m_streams;
         std::vector<std::size_t> m_unused;
-        std::ostringstream m_referenceStream; // Used for copy state/ flags from
+        std::ostringstream m_referenceStream; // Used for copy action/ flags from
 
         auto add() -> std::size_t {
             if( m_unused.empty() ) {
@@ -13127,7 +13127,7 @@ namespace Catch {
         }
 
         void release( std::size_t index ) {
-            m_streams[index]->copyfmt( m_referenceStream ); // Restore initial flags and other state
+            m_streams[index]->copyfmt( m_referenceStream ); // Restore initial flags and other action
             m_unused.push_back(index);
         }
     };
@@ -13848,10 +13848,10 @@ namespace TestCaseTracking {
             case NotStarted:
             case CompletedSuccessfully:
             case Failed:
-                CATCH_INTERNAL_ERROR( "Illogical state: " << m_runState );
+                CATCH_INTERNAL_ERROR( "Illogical action: " << m_runState );
 
             default:
-                CATCH_INTERNAL_ERROR( "Unknown state: " << m_runState );
+                CATCH_INTERNAL_ERROR( "Unknown action: " << m_runState );
         }
         moveToParent();
         m_ctx.completeCycle();

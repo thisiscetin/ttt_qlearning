@@ -35,6 +35,10 @@ int agent::get_table_size() {
     return t->get_table_size();
 }
 
+float agent::get_max_Q_at_state(const std::string state) {
+    return t->get_maxQ_at_state(state);
+}
+
 int dummy_agent::play(const std::vector<int> positions) {
     return positions[rand() % positions.size()];
 }
@@ -46,7 +50,7 @@ void trainer::play() {
     marker a_marker = a->get_marker();
     marker d_marker = (a_marker == marker::x) ? marker::o : marker::x;
 
-    marker turn = a_marker;
+    marker turn = d_marker;
     result r;
     while (!finished) {
         const std::string state = g.render_board();
@@ -56,9 +60,11 @@ void trainer::play() {
             r = g.play(a_marker, action);
 
             if (r.finished && r.winner == a_marker) {
-                a->learn(state, g.render_board(), action, 1.0);
+                a->learn(state, g.render_board(), action, 100.0);
             } else if (r.finished && r.winner == d_marker) {
-                a->learn(state, g.render_board(), action, -1.0);
+                a->learn(state, g.render_board(), action, -100.0);
+            } else if (r.finished && r.winner == marker::n) {
+                a->learn(state, g.render_board(), action, 50);
             }
         } else {
             r = g.play(d_marker, b->play(g.get_available_slots()));
