@@ -44,3 +44,14 @@ TEST_CASE("table updates seen action as expected", "[table]") {
     REQUIRE(t.get_table_size() == 3);
 }
 
+TEST_CASE("table gets state action as expected", "[table]") {
+    table t = table();
+
+    REQUIRE(t.predict("state0", std::vector<int> {1, 2, 3}) == 1);
+
+    t.update("state0", 3, 4);
+    REQUIRE(t.get_Q_at_state_action("state0", 1) == 0);
+    REQUIRE(t.get_Q_at_state_action("state0", 2) == 0);
+    REQUIRE(t.get_Q_at_state_action("state0", 3) == 4);
+}
+
