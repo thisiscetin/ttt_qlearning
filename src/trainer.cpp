@@ -61,6 +61,7 @@ void trainer::play() {
     std::vector<history_entry> past_moves = std::vector<history_entry>{};
     while (!finished) {
         const std::string state = g->render_board();
+        float reward = 0;
 
         if (turn == a_marker) {
             int action = a->play(state, g->get_available_slots());
@@ -68,11 +69,14 @@ void trainer::play() {
 
             const std::string next_state = g->render_board();
             if (r.finished && r.winner == a_marker) {
-                a->learn(state, next_state, action, 100.0);
+                reward = 10;
+                a->learn(state, next_state, action, reward);
             } else if (r.finished && r.winner == d_marker) {
-                a->learn(state, next_state, action, -100.0);
+                reward = -10;
+                a->learn(state, next_state, action, reward);
             } else if (r.finished && r.winner == marker::n) {
-                a->learn(state, next_state, action, 50);
+                reward = 5;
+                a->learn(state, next_state, action, reward);
             } else {
                 // enter history to refresh
                 past_moves.push_back(history_entry{state, next_state, action});
@@ -87,7 +91,7 @@ void trainer::play() {
             // refresh past actions
             while (past_moves.size() > 0) {
                 history_entry le = past_moves.back();
-                a->learn(le.state, le.next_state, le.action, 0);
+                a->learn(le.state, le.next_state, le.action, reward /= 2);
                 past_moves.pop_back();
             }
         }

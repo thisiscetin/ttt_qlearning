@@ -56,11 +56,9 @@ void play_with_human(agent *a) {
 
             if (r.winner == a_marker) {
                 std::cout << "Agent won!" << std::endl;
-                a->learn(state, g->render_board(), a->play(state, g->get_available_slots()), 100.0);
             }
             if (r.winner == h_marker) {
                 std::cout << "You won!" << std::endl;
-                a->learn(state, g->render_board(), a->play(state, g->get_available_slots()), -100.0);
             }
             return;
         }
@@ -69,13 +67,15 @@ void play_with_human(agent *a) {
 }
 
 int main() {
-    strategy *s = new strategy{0.5, 0.5, 10};
+    strategy *s = new strategy{0.7, 0.5, 20};
     agent *a = new agent(marker::x, s);
+
     dummy_agent *d0 = new dummy_agent();
     dummy_agent *d1 = new dummy_agent();
 
     trainer *t0 = new trainer(a, d0);
     trainer *t1 = new trainer(a, d1);
+
     std::thread th0(start_training, t0);
     std::thread th1(start_training, t1);
 

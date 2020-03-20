@@ -11,6 +11,7 @@ void snapshot::update(int action_pos, float new_value) {
     for (auto const &action : possible_actions) {
         if (action->pos == action_pos) {
             action->val = new_value;
+            history.push_back(update_history{action_pos, new_value});
             return;
         }
     }
