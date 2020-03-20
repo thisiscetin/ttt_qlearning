@@ -43,8 +43,14 @@ int dummy_agent::play(const std::vector<int> positions) {
     return positions[rand() % positions.size()];
 }
 
+struct history_entry {
+    std::string state;
+    std::string next_state;
+    int action;
+};
+
 void trainer::play() {
-    game g = game();
+    game *g = new game();
 
     bool finished = false;
     marker a_marker = a->get_marker();
@@ -52,25 +58,40 @@ void trainer::play() {
 
     marker turn = d_marker;
     result r;
+    std::vector<history_entry> past_moves = std::vector<history_entry>{};
     while (!finished) {
-        const std::string state = g.render_board();
+        const std::string state = g->render_board();
 
         if (turn == a_marker) {
-            int action = a->play(state, g.get_available_slots());
-            r = g.play(a_marker, action);
+            int action = a->play(state, g->get_available_slots());
+            r = g->play(a_marker, action);
 
+            const std::string next_state = g->render_board();
             if (r.finished && r.winner == a_marker) {
-                a->learn(state, g.render_board(), action, 100.0);
+                a->learn(state, next_state, action, 100.0);
             } else if (r.finished && r.winner == d_marker) {
-                a->learn(state, g.render_board(), action, -100.0);
+                a->learn(state, next_state, action, -100.0);
             } else if (r.finished && r.winner == marker::n) {
-                a->learn(state, g.render_board(), action, 50);
+                a->learn(state, next_state, action, 50);
+            } else {
+                // enter history to refresh
+                past_moves.push_back(history_entry{state, next_state, action});
             }
         } else {
-            r = g.play(d_marker, b->play(g.get_available_slots()));
+            r = g->play(d_marker, b->play(g->get_available_slots()));
         }
 
         finished = r.finished;
+
+        if (finished) {
+            // refresh past actions
+            while (past_moves.size() > 0) {
+                history_entry le = past_moves.back();
+                a->learn(le.state, le.next_state, le.action, 0);
+                past_moves.pop_back();
+            }
+        }
+
         turn = (turn == a_marker) ? d_marker : a_marker;
     }
 
@@ -79,6 +100,7 @@ void trainer::play() {
     if (r.winner == d_marker)
         stats.dummy_agent_won++;
     stats.game_count++;
+    delete g;
 }
 
 const trainer_stats trainer::get_stats() {

@@ -1,7 +1,7 @@
 //
 // Created by M. Cetin on 3/17/20.
 //
-
+#include <stdexcept>
 #include "board.h"
 
 void board::mark(marker m, int pos) {
