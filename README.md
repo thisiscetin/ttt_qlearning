@@ -13,7 +13,7 @@ At the same time you can play against the agent, by using numbers on the board b
 This command should create a binary in `bin/` folder name `game`.
 
 ## Running the game
-After running the command from the root folder,
+After running the command from the base (ttt_qlearning) folder,
 
 ```
 > bin/game
@@ -37,9 +37,10 @@ x--
 Enter pos [0-8]: 
 ```
 
-While training continues you can play the game in an infinite loop.
+While training continues you can play the game continuously.
 
-# References
+## References
+- [Reinforcement Learning by Deepsense](https://deepsense.ai/what-is-reinforcement-learning-the-complete-guide/)
 - [Double Q-Learning](https://towardsdatascience.com/double-q-learning-the-easy-way-a924c4085ec3)
 - [Wikipedia Q-learning](https://en.wikipedia.org/wiki/Q-learning)
 - [Wikipedia Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe)
