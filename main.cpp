@@ -31,7 +31,7 @@ void play_with_human(agent *a) {
 
     marker a_marker = a->get_marker();
     marker h_marker = (a_marker == marker::x) ? marker::o : marker::x;
-    marker turn = a_marker;
+    marker turn = rand() % 2 == 0 ? a_marker : h_marker;
 
     result r;
     while (true) {

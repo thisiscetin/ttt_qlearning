@@ -18,24 +18,32 @@ int agent::play(const std::string state, const std::vector<int> positions) {
         int elem = rand() % positions.size();
         return positions[elem];
     }
-    return t->predict(state, positions);
+
+    // moves to double Q
+    if ((rand() % 2 == 0))
+        return t0->predict(state, positions);
+    else
+        return t1->predict(state, positions);
 }
 
 void agent::learn(const std::string state, const std::string next_state,
                   int action, float reward) {
+    table* t = rand() % 2 == 0 ? t0 : t1;
+
     float oldQ = t->get_Q_at_state_action(state, action);
     float nextMaxQ = t->get_maxQ_at_state(next_state);
     float newQValue = oldQ + s->learning_rate * (reward +
                                                  s->discount_factor * nextMaxQ - oldQ);
-
     t->update(state, action, newQValue);
 }
 
 int agent::get_table_size() {
-    return t->get_table_size();
+    return t0->get_table_size() + t1->get_table_size();
 }
 
 float agent::get_max_Q_at_state(const std::string state) {
+    table* t = rand() % 2 == 0 ? t0 : t1;
+
     return t->get_maxQ_at_state(state);
 }
 
@@ -56,7 +64,7 @@ void trainer::play() {
     marker a_marker = a->get_marker();
     marker b_marker = (a_marker == marker::x) ? marker::o : marker::x;
 
-    marker turn = b_marker;
+    marker turn = rand() % 2 == 0 ? a_marker : b_marker;
     result r;
 
     std::vector<history_entry> past_moves_a = std::vector<history_entry>{};
@@ -104,6 +112,7 @@ void trainer::play() {
         }
         finished = r.finished;
 
+        float last_reward = reward;
         if (finished && r.winner != b_marker) {
             // refresh past actions
             while (past_moves_a.size() > 0) {
@@ -116,7 +125,7 @@ void trainer::play() {
             // refresh past actions
             while (past_moves_b.size() > 0) {
                 history_entry le = past_moves_b.back();
-                b->learn(le.state, le.next_state, le.action, reward /= 2);
+                b->learn(le.state, le.next_state, le.action, last_reward /= 2);
                 past_moves_b.pop_back();
             }
         }

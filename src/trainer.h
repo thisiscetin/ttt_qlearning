@@ -22,11 +22,13 @@ public:
         if (s->discovery_epsilon != -1) {
             srand(time(0));
         }
-        t = new table();
+        t0 = new table();
+        t1 = new table();
     }
 
     ~agent() {
-        delete t;
+        delete t0;
+        delete t1;
         delete s;
     }
 
@@ -42,7 +44,9 @@ public:
     float get_max_Q_at_state(const std::string state);
 
 private:
-    table *t;
+    table *t0;
+    table *t1;
+
     strategy *s;
     marker m;
 };
