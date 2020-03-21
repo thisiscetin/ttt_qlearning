@@ -28,7 +28,7 @@ int agent::play(const std::string state, const std::vector<int> positions) {
 
 void agent::learn(const std::string state, const std::string next_state,
                   int action, float reward) {
-    table* t = rand() % 2 == 0 ? t0 : t1;
+    table *t = rand() % 2 == 0 ? t0 : t1;
 
     float oldQ = t->get_Q_at_state_action(state, action);
     float nextMaxQ = t->get_maxQ_at_state(next_state);
@@ -42,7 +42,7 @@ int agent::get_table_size() {
 }
 
 float agent::get_max_Q_at_state(const std::string state) {
-    table* t = rand() % 2 == 0 ? t0 : t1;
+    table *t = rand() % 2 == 0 ? t0 : t1;
 
     return t->get_maxQ_at_state(state);
 }
@@ -65,81 +65,51 @@ void trainer::play() {
     marker b_marker = (a_marker == marker::x) ? marker::o : marker::x;
 
     marker turn = rand() % 2 == 0 ? a_marker : b_marker;
-    result r;
 
     std::vector<history_entry> past_moves_a = std::vector<history_entry>{};
     std::vector<history_entry> past_moves_b = std::vector<history_entry>{};
+    result turn_result;
     while (!finished) {
         const std::string state = g->render_board();
         float reward = 0;
 
-        if (turn == a_marker) {
-            int action = a->play(state, g->get_available_slots());
-            r = g->play(a_marker, action);
+        agent *x = turn == a_marker ? a : b;
+        int action = x->play(state, g->get_available_slots());
+        turn_result = g->play(turn, action);
 
-            const std::string next_state = g->render_board();
-            if (r.finished && r.winner == a_marker) {
-                reward = 10;
-                a->learn(state, next_state, action, reward);
-            } else if (r.finished && r.winner == b_marker) {
-                reward = -10;
-                a->learn(state, next_state, action, reward);
-            } else if (r.finished && r.winner == marker::n) {
-                reward = 5;
-                a->learn(state, next_state, action, reward);
+        const std::string next_state = g->render_board();
+        if (turn == a_marker)
+            past_moves_a.push_back(history_entry{state, next_state, action});
+        else
+            past_moves_b.push_back(history_entry{state, next_state, action});
+
+        if (turn_result.finished) {
+            reward = turn_result.winner == marker::n ? 2 : 10;
+
+            if (turn_result.winner != marker::n) {
+                std::vector<history_entry> past_moves = turn == a_marker ? past_moves_a : past_moves_b;
+
+                while (past_moves.size() > 0) {
+                    history_entry le = past_moves.back();
+                    x->learn(le.state, le.next_state, le.action, reward);
+                    past_moves.pop_back();
+
+                    reward = reward / 2;
+                }
             } else {
-                // enter history to refresh
-                past_moves_a.push_back(history_entry{state, next_state, action});
-            }
-        } else {
-            int action = b->play(state, g->get_available_slots());
-            r = g->play(b_marker, action);
-
-            const std::string next_state = g->render_board();
-            if (r.finished && r.winner == b_marker) {
-                reward = 10;
-                b->learn(state, next_state, action, reward);
-            } else if (r.finished && r.winner == a_marker) {
-                reward = -10;
-                b->learn(state, next_state, action, reward);
-            } else if (r.finished && r.winner == marker::n) {
-                reward = 5;
-                b->learn(state, next_state, action, reward);
-            } else {
-                // enter history to refresh
-                past_moves_b.push_back(history_entry{state, next_state, action});
+                // on draw
+                x->learn(state, next_state, action, reward);
             }
         }
-        finished = r.finished;
-
-        float last_reward = reward;
-        if (finished && r.winner != b_marker) {
-            reward = reward / 2;
-            // refresh past actions
-            while (past_moves_a.size() > 0) {
-                history_entry le = past_moves_a.back();
-                a->learn(le.state, le.next_state, le.action, reward);
-                past_moves_a.pop_back();
-            }
-        }
-        if (finished && r.winner != a_marker) {
-            last_reward = last_reward / 2;
-            // refresh past actions
-            while (past_moves_b.size() > 0) {
-                history_entry le = past_moves_b.back();
-                b->learn(le.state, le.next_state, le.action, last_reward);
-                past_moves_b.pop_back();
-            }
-        }
-
+        finished = turn_result.finished;
         turn = (turn == a_marker) ? b_marker : a_marker;
     }
-
-    if (r.winner == a_marker)
-        stats.agent_won++;
-    if (r.winner == b_marker)
-        stats.dummy_agent_won++;
+    if (turn_result.winner == a_marker)
+        stats.agent0_won++;
+    if (turn_result.winner == b_marker)
+        stats.agent1_won++;
     stats.game_count++;
+
     delete g;
 }
 

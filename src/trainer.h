@@ -62,11 +62,11 @@ public:
 
 struct trainer_stats {
     int game_count;
-    int agent_won;
-    int dummy_agent_won;
+    int agent0_won;
+    int agent1_won;
 
     int draw_count() {
-        return game_count - agent_won - dummy_agent_won;
+        return game_count - agent0_won - agent1_won;
     }
 };
 

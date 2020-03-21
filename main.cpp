@@ -3,7 +3,7 @@
 #import <iostream>
 #include "trainer.h"
 
-void start_training(trainer *t) {
+void start_training(trainer *t, std::string game_name) {
     int counter = 0;
     int lastWon = 0;
     int lastLost = 0;
@@ -14,13 +14,14 @@ void start_training(trainer *t) {
 
         if (counter % 500000 == 0) {
             const trainer_stats &s = t->get_stats();
-            std::cout << "agent won %: " << float(s.agent_won - lastWon) * 100 / float(counter - lastCheckPoint);
-            std::cout << ", agent lost %: "
-                      << float(s.dummy_agent_won - lastLost) * 100 / float(counter - lastCheckPoint);
-            std::cout << "  | table (action) size: " << t->get_table_size() << std::endl;
+            std::cout << "\n[" << game_name << "]\t";
+            std::cout << "agent 0 won %: " << float(s.agent0_won - lastWon) * 100 / float(counter - lastCheckPoint);
+            std::cout << ", agent 1 won %: "
+                      << float(s.agent1_won - lastLost) * 100 / float(counter - lastCheckPoint);
+            std::cout << "\t\t| agent 0 double table (action) size: " << t->get_table_size();
 
-            lastWon = s.agent_won;
-            lastLost = s.dummy_agent_won;
+            lastWon = s.agent0_won;
+            lastLost = s.agent1_won;
             lastCheckPoint = counter;
         }
     }
@@ -43,7 +44,7 @@ void play_with_human(agent *a) {
             std::cout << g->render_board() << std::endl;
 
             int pos;
-            std::cout << "Enter pos: ";
+            std::cout << "\nEnter pos [0-8]: ";
             std::cin >> pos;
             std::cout << std::endl;
             r = g->play(h_marker, pos);
@@ -67,21 +68,24 @@ void play_with_human(agent *a) {
 }
 
 int main() {
-    strategy *s1 = new strategy{0.5, 0.5, 50};
+    strategy *s1 = new strategy{0.5, 0.5, 25};
     agent *a = new agent(marker::x, s1);
 
-    strategy *s2 = new strategy{0.8, 0.7, 5};
-    agent *b = new agent(marker::x, s2);
+    // main agent a is played agains two other agents
+    // discovery epsilon is 1/x, if discovery epsilon is 4, 25% of the time agent will make random moves
+    // agent b is a dumber than with many random moves agent c
+    strategy *s2 = new strategy{0.8, 0.7, 4};
+    agent *b = new agent(marker::o, s2);
 
-    strategy *s3 = new strategy{0.9, 0.4, 20};
-    agent *c = new agent(marker::x, s3);
+    strategy *s3 = new strategy{0.9, 0.6, 10};
+    agent *c = new agent(marker::o, s3);
 
 
     trainer *t0 = new trainer(a, b);
     trainer *t1 = new trainer(a, c);
 
-    std::thread th0(start_training, t0);
-    std::thread th1(start_training, t1);
+    std::thread th0(start_training, t0, "agent a vs. b");
+    std::thread th1(start_training, t1, "agent a vs. c");
 
     while (true) {
         try {

@@ -59,8 +59,8 @@ TEST_CASE("trainer plays a game as expected without exploration", "[trainer/play
 
     trainer_stats s = t.get_stats();
     REQUIRE(s.game_count == 1);
-    REQUIRE(s.agent_won == 1);
-    REQUIRE(s.dummy_agent_won == 0);
+    REQUIRE(s.agent0_won == 1);
+    REQUIRE(s.agent1_won == 0);
     REQUIRE(s.draw_count() == 0);
 }
 
@@ -75,13 +75,13 @@ TEST_CASE("agent should win over dummy agent over time", "[trainer/play]") {
         t.play();
     }
     trainer_stats s0 = t.get_stats();
-    float won_ratio0 = float(s0.agent_won) / float(s0.game_count);
+    float won_ratio0 = float(s0.agent0_won) / float(s0.game_count);
 
     for (int i = 0; i < 10000; i++) {
         t.play();
     }
     trainer_stats s1 = t.get_stats();
-    float won_ratio1 = float(s1.agent_won) / float(s1.game_count);
+    float won_ratio1 = float(s1.agent0_won) / float(s1.game_count);
 
     REQUIRE(won_ratio1 > won_ratio0);
 
@@ -89,7 +89,7 @@ TEST_CASE("agent should win over dummy agent over time", "[trainer/play]") {
         t.play();
     }
     trainer_stats s2 = t.get_stats();
-    float won_ratio2 = float(s2.agent_won) / float(s2.game_count);
+    float won_ratio2 = float(s2.agent0_won) / float(s2.game_count);
 
     REQUIRE(won_ratio2 > won_ratio1);
 }
