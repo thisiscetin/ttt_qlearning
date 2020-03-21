@@ -14,11 +14,6 @@ struct action {
     float val;
 };
 
-struct update_history {
-    int action;
-    float val;
-};
-
 class snapshot {
 public:
     explicit snapshot(const std::vector<int> empty_slots) {
@@ -37,7 +32,6 @@ public:
 
 private:
     std::vector<action*> possible_actions;
-    std::vector<update_history> history;
     std::mutex store_mutex;
 };
 
@@ -53,6 +47,5 @@ private:
     std::unordered_map<std::string, snapshot*> store;
     std::mutex store_mutex;
 };
-
 
 #endif //XOX_QLEARNING_TABLE_H

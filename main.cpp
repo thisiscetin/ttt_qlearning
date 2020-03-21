@@ -67,14 +67,13 @@ void play_with_human(agent *a) {
 }
 
 int main() {
-    strategy *s = new strategy{0.7, 0.5, 20};
-    agent *a = new agent(marker::x, s);
+    strategy *s1 = new strategy{0.7, 0.5, 25};
+    strategy *s2 = new strategy{0.8, 0.7, 5};
+    agent *a = new agent(marker::x, s1);
+    agent *b = new agent(marker::x, s2);
 
-    dummy_agent *d0 = new dummy_agent();
-    dummy_agent *d1 = new dummy_agent();
-
-    trainer *t0 = new trainer(a, d0);
-    trainer *t1 = new trainer(a, d1);
+    trainer *t0 = new trainer(a, b);
+    trainer *t1 = new trainer(a, b);
 
     std::thread th0(start_training, t0);
     std::thread th1(start_training, t1);

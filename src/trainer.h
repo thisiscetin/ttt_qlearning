@@ -68,7 +68,7 @@ struct trainer_stats {
 
 class trainer {
 public:
-    explicit trainer(agent *a_in, dummy_agent *b_in) : a(a_in), b(b_in),
+    explicit trainer(agent *a_in, agent *b_in) : a(a_in), b(b_in),
                                                        stats(trainer_stats{0, 0, 0}) {}
 
     ~trainer() {
@@ -84,7 +84,7 @@ public:
 
 private:
     agent *a;
-    dummy_agent *b;
+    agent *b;
     trainer_stats stats;
 };
 
