@@ -72,7 +72,7 @@ struct trainer_stats {
 
 class trainer {
 public:
-    explicit trainer(agent *a_in, agent *b_in) : a(a_in), b(b_in),
+    trainer(agent *a_in, agent *b_in) : a(a_in), b(b_in),
                                                        stats(trainer_stats{0, 0, 0}) {}
 
     ~trainer() {

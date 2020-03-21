@@ -50,7 +50,7 @@ TEST_CASE("trainer_stats returns draws as expected", "[trainer/trainer_stats]") 
 
 TEST_CASE("trainer plays a game as expected without exploration", "[trainer/play]") {
     agent *a = new agent(marker::x, new strategy{1, 0.5, -1});
-    dummy_agent *d = new dummy_agent();
+    agent *d = new agent(marker::o, new strategy{1, 1, 2});
     // override dummy agent's seeding with time
     srand(0);
 
@@ -65,9 +65,8 @@ TEST_CASE("trainer plays a game as expected without exploration", "[trainer/play
 }
 
 TEST_CASE("agent should win over dummy agent over time", "[trainer/play]") {
-    strategy *st = new strategy{0.5, 0.2, 4};
-    agent *a = new agent(marker::x, st);
-    dummy_agent *d = new dummy_agent();
+    agent *a = new agent(marker::x, new strategy{0.5, 0.5, 10});
+    agent *d = new agent(marker::o, new strategy{1, 1, 2});
 
     trainer t = trainer(a, d);
     t.play();

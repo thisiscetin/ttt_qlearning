@@ -114,18 +114,20 @@ void trainer::play() {
 
         float last_reward = reward;
         if (finished && r.winner != b_marker) {
+            reward = reward / 2;
             // refresh past actions
             while (past_moves_a.size() > 0) {
                 history_entry le = past_moves_a.back();
-                a->learn(le.state, le.next_state, le.action, reward /= 2);
+                a->learn(le.state, le.next_state, le.action, reward);
                 past_moves_a.pop_back();
             }
         }
         if (finished && r.winner != a_marker) {
+            last_reward = last_reward / 2;
             // refresh past actions
             while (past_moves_b.size() > 0) {
                 history_entry le = past_moves_b.back();
-                b->learn(le.state, le.next_state, le.action, last_reward /= 2);
+                b->learn(le.state, le.next_state, le.action, last_reward);
                 past_moves_b.pop_back();
             }
         }

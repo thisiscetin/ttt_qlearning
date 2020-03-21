@@ -37,7 +37,7 @@ void play_with_human(agent *a) {
     while (true) {
         const std::string state = g->render_board();
         if (turn == a_marker) {
-            std::cout << "Max Q at action: " << a->get_max_Q_at_state(state) << std::endl;
+            std::cout << "Max Q was at state: " << a->get_max_Q_at_state(state) << " on action: " << a->play(state, g->get_available_slots()) << std::endl;
             r = g->play(a_marker, a->play(state, g->get_available_slots()));
         } else {
             std::cout << g->render_board() << std::endl;
@@ -67,13 +67,18 @@ void play_with_human(agent *a) {
 }
 
 int main() {
-    strategy *s1 = new strategy{0.7, 0.5, 25};
-    strategy *s2 = new strategy{0.8, 0.7, 5};
+    strategy *s1 = new strategy{0.5, 0.5, 50};
     agent *a = new agent(marker::x, s1);
+
+    strategy *s2 = new strategy{0.8, 0.7, 5};
     agent *b = new agent(marker::x, s2);
 
+    strategy *s3 = new strategy{0.9, 0.4, 20};
+    agent *c = new agent(marker::x, s3);
+
+
     trainer *t0 = new trainer(a, b);
-    trainer *t1 = new trainer(a, b);
+    trainer *t1 = new trainer(a, c);
 
     std::thread th0(start_training, t0);
     std::thread th1(start_training, t1);
